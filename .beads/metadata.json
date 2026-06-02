@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "embedded",
+  "dolt_database": "NoMoreWorldQuests",
+  "project_id": "93757f64-90b7-4aa1-95a8-9658c921c149"
+}
