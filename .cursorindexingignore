@@ -1,0 +1,6 @@
+
+# Don't index SpecStory auto-save files, but allow explicit context inclusion via @ references
+.specstory/**
+
+# Don't index vendored reference repos, but allow explicit context via @repos/ references
+repos/**

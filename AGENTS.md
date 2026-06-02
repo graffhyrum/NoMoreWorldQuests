@@ -27,26 +27,6 @@ bd dolt push          # Push beads data to remote
 
 **ALWAYS use non-interactive flags** with file operations to avoid hanging on confirmation prompts.
 
-Shell commands like `cp`, `mv`, and `rm` may be aliased to include `-i` (interactive) mode on some systems, causing the agent to hang indefinitely waiting for y/n input.
-
-**Use these forms instead:**
-```bash
-# Force overwrite without prompting
-cp -f source dest           # NOT: cp source dest
-mv -f source dest           # NOT: mv source dest
-rm -f file                  # NOT: rm file
-
-# For recursive operations
-rm -rf directory            # NOT: rm -r directory
-cp -rf source dest          # NOT: cp -r source dest
-```
-
-**Other commands that may prompt:**
-- `scp` - use `-o BatchMode=yes` for non-interactive
-- `ssh` - use `-o BatchMode=yes` to fail instead of prompting
-- `apt-get` - use `-y` flag
-- `brew` - use `HOMEBREW_NO_AUTO_UPDATE=1` env var
-
 <!-- BEGIN BEADS INTEGRATION v:1 profile:minimal hash:6cd5cc61 -->
 ## Beads Issue Tracker
 
@@ -125,3 +105,38 @@ bd prime                # Refresh Beads context
 
 **Architecture in one line:** issues live in a local Dolt DB; sync uses `refs/dolt/data` on your git remote; `.beads/issues.jsonl` is a passive export. See https://github.com/gastownhall/beads/blob/main/docs/SYNC_CONCEPTS.md for details and anti-patterns.
 <!-- END BEADS CODEX SETUP -->
+
+## Agent skills
+
+### Issue tracker
+
+Issues tracked with Beads (`bd`) in `.beads/`. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Five canonical triage roles mapped to `bd label` strings (defaults). See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context layout — `CONTEXT.md` + `docs/adr/` at repo root. See `docs/agents/domain.md`.
+
+## Vendored Repositories
+
+External reference code lives under `repos/`.
+
+- Use vendored repos as read-only reference when working with WoW UI APIs
+- Prefer patterns from vendored source over guesses or web search
+- Do not edit files under `repos/` unless explicitly asked
+- Do not copy or import from `repos/` into addon code — addon code lives at repo root
+
+### WoW UI source
+
+[`Gethe/wow-ui-source`](https://github.com/Gethe/wow-ui-source) is vendored at `repos/wow-ui-source/` (branch `live`).
+
+When implementing or debugging addon surfaces (minimap, world map, objective tracker, etc.), inspect `repos/wow-ui-source/Interface/` for Blizzard frame mixins, POI providers, and quest UI behavior.
+
+Update vendored copy:
+
+```bash
+git subtree pull --prefix=repos/wow-ui-source https://github.com/Gethe/wow-ui-source.git live --squash
+```

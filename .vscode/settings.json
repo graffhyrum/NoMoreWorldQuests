@@ -1,0 +1,38 @@
+{
+    "files.exclude": {
+        "repos/**": true
+    },
+    "files.watcherExclude": {
+        "repos/**": true
+    },
+    "search.exclude": {
+        "repos/**": true
+    },
+    "Lua.runtime.version": "Lua 5.1",
+    "Lua.runtime.builtin": {
+        "basic": "disable",
+        "debug": "disable",
+        "io": "disable",
+        "math": "disable",
+        "os": "disable",
+        "package": "disable",
+        "string": "disable",
+        "table": "disable",
+        "utf8": "disable"
+    },
+    "Lua.workspace.library": [
+        "c:\\Users\\graff\\.cursor\\extensions\\ketho.wow-api-0.22.3\\Annotations\\Core"
+    ],
+    "specstory.cloudSync.enabled": "never",
+    "Lua.diagnostics.globals": [
+        "WorldMapFrame",
+        "WorldQuestDataProviderMixin",
+        "TalkingHeadFrame",
+        "SlashCmdList",
+        "DEFAULT_CHAT_FRAME",
+        "TaskPOI_OnEnter"
+    ],
+    "Lua.diagnostics.disable": [
+        "assign-type-mismatch"
+    ]
+}
