@@ -122,7 +122,7 @@ Single-context layout — `CONTEXT.md` + `docs/adr/` at repo root. See `docs/age
 
 ## Vendored Repositories
 
-External reference code lives under `repos/`.
+External reference code lives under `repos/`. The folder is visible in the editor but excluded from workspace search and Cursor indexing — use `@repos/wow-ui-source/` to attach it in chat.
 
 - Use vendored repos as read-only reference when working with WoW UI APIs
 - Prefer patterns from vendored source over guesses or web search
