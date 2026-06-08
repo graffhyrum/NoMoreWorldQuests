@@ -10,3 +10,6 @@
 
 # Environment variables
 .env
+
+# Bun (@types/bun for scripts/)
+node_modules/

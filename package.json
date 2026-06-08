@@ -1,0 +1,8 @@
+{
+  "name": "no-more-world-quests",
+  "private": true,
+  "version": "1.0.0",
+  "devDependencies": {
+    "@types/bun": "^1.3.14"
+  }
+}

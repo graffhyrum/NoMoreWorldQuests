@@ -83,6 +83,16 @@ Domain terms and behavior contracts live in [CONTEXT.md](CONTEXT.md). Agent and 
 
 WoW UI reference source is vendored at `repos/wow-ui-source/` (git subtree, not shipped with the addon).
 
+### Changelog and releases
+
+This project uses [Changesets](https://github.com/changesets/changesets) for changelog maintenance. Install the CLI once globally: `bun install -g @changesets/cli`.
+
+1. After a user-facing change, run `changeset`, pick a semver bump, and write a short summary.
+2. Commit the generated file under `.changeset/`.
+3. To release, run `bun scripts/version.ts` — updates [CHANGELOG.md](CHANGELOG.md), `package.json`, and `NoMoreWorldQuests.toc`.
+
+See [.changeset/README.md](.changeset/README.md) for details.
+
 ## License
 
 Original addon code is [MIT](LICENSE).
