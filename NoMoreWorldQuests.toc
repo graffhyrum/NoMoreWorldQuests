@@ -1,0 +1,37 @@
+## Interface: 120005
+## Title: No More World Quests
+## Notes: Suppress during-quest world quest UI; completion prompts always show.
+## Author: NoMoreWorldQuests
+## Version: 1.0.0
+## SavedVariables: NoMoreWorldQuestsDB
+## X-Curse-Project-ID: 999999
+## IconTexture: Interface\AddOns\NoMoreWorldQuests\assets\logo\logo-64.tga
+## LoadWith: Blizzard_TalkingHeadUI
+
+libs\LibStub.lua
+libs\CallbackHandler-1.0.lua
+libs\LibDataBroker-1.1.lua
+libs\LibDBIcon-1.0.lua
+
+core\VisibilityRule.lua
+core\QuestUtil.lua
+core\WorldQuestRule.lua
+core\MapCanvas.lua
+core\Debounce.lua
+sync\MapFilterSync.lua
+core\Controller.lua
+
+surfaces\MinimapSurface.lua
+surfaces\WorldMapSurface.lua
+surfaces\ObjectiveTrackerSurface.lua
+surfaces\IntrusionSurface.lua
+
+active\ActiveWQZone.lua
+active\MinimapAlert.lua
+active\IntrusionTrace.lua
+
+ui\Settings.lua
+ui\MinimapButton.lua
+ui\Slash.lua
+
+core\Bootstrap.lua
