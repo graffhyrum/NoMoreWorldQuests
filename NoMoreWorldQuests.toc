@@ -5,7 +5,7 @@
 ## Category-enUS: Quests
 ## Version: 1.0.0
 ## SavedVariables: NoMoreWorldQuestsDB
-## X-Curse-Project-ID: 999999
+## X-Curse-Project-ID: 1569103
 ## IconTexture: Interface\AddOns\NoMoreWorldQuests\assets\logo\logo-64.tga
 ## LoadWith: Blizzard_TalkingHeadUI
 
