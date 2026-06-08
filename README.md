@@ -85,13 +85,14 @@ WoW UI reference source is vendored at `repos/wow-ui-source/` (git subtree, not 
 
 ### Changelog and releases
 
-This project uses [Changesets](https://github.com/changesets/changesets) for changelog maintenance. Install the CLI once globally: `bun install -g @changesets/cli`.
+Uses [Changesets](https://github.com/changesets/changesets) + GitHub Actions:
 
-1. After a user-facing change, run `changeset`, pick a semver bump, and write a short summary.
-2. Commit the generated file under `.changeset/`.
-3. To release, run `bun scripts/version.ts` — updates [CHANGELOG.md](CHANGELOG.md), `package.json`, and `NoMoreWorldQuests.toc`.
+1. After a user-facing change: `bun run changeset`, pick semver bump, commit the `.changeset/*.md` file.
+2. Open PR → **Changesets** workflow verifies a changeset exists when needed.
+3. Merge → **Version Packages** opens a PR bumping `CHANGELOG.md`, `package.json`, and `NoMoreWorldQuests.toc`.
+4. Merge that PR → CI pushes tag `v*` → **Release** workflow publishes to CurseForge and GitHub Releases.
 
-See [.changeset/README.md](.changeset/README.md) for details.
+Local only: `bun run version` (same as CI version step). See [.changeset/README.md](.changeset/README.md).
 
 ## License
 

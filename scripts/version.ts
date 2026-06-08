@@ -8,7 +8,7 @@ const changeset = Bun.spawn(["changeset", "version"], {
   cwd: root,
   stdout: "inherit",
   stderr: "inherit",
-  stdin: "inherit",
+  stdin: "ignore",
 });
 
 const exitCode = await changeset.exited;
