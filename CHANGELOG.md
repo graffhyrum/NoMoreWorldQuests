@@ -1,9 +1,7 @@
-# no-more-world-quests
+# Changelog
 
 ## 1.0.0
 
-### Initial release
-
-- Retail-only suppression of during-quest world quest UI (minimap, world map, objective tracker, intrusion surfaces)
-- Minimap toggle, settings panel, and `/nmwq` slash commands
-- Active world quest zone minimap alert while suppression is on
+- Initial release: suppress during-quest world quest UI on minimap, world map, intrusion, and objective tracker
+- Completion UI always shown; minimap alert in active WQ zones
+- Per-character suppression toggle (minimap + `/nmwq`); retail only

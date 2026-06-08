@@ -1,0 +1,27 @@
+package-as: NoMoreWorldQuests
+enable-nolib-creation: no
+
+ignore:
+  - .git
+  - .github
+  - .beads
+  - .cursor
+  - .codex
+  - .claude
+  - .specstory
+  - .vscode
+  - .agents
+  - .changeset
+  - docs
+  - repos
+  - scripts
+  - CONTEXT.md
+  - AGENTS.md
+  - CLAUDE.md
+  - package.json
+  - package-lock.json
+  - bun.lock
+  - "*.md"
+  - "!libs/README.md"
+  - "!libs/THIRD_PARTY_NOTICES.md"
+  - assets/logo/logo-master.png

@@ -13,3 +13,6 @@
 
 # Bun (@types/bun for scripts/)
 node_modules/
+
+# BigWigs packager output
+.release/
