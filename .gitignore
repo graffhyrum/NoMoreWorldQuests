@@ -1,3 +1,5 @@
+# Local AI session history (SpecStory)
+.specstory/
 
 # Beads / Dolt files (added by bd init)
 .dolt/
