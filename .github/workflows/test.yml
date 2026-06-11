@@ -1,0 +1,52 @@
+name: Test
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/checkout@v6
+        with:
+          repository: Falkicon/Mechanic
+          path: mechanic
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Configure Mechanic paths
+        run: |
+          PARENT="$(dirname "${{ github.workspace }}")"
+          ln -sfn "${{ github.workspace }}" "$PARENT/NoMoreWorldQuests"
+          ln -sfn "${{ github.workspace }}/mechanic" "$PARENT/Mechanic"
+          mkdir -p "$HOME/.mechanic"
+          cat > "$HOME/.mechanic/config.json" <<EOF
+          {
+            "dev_path": "$PARENT",
+            "addon_search_paths": ["${{ github.workspace }}"],
+            "flavors": ["_retail_"]
+          }
+          EOF
+
+      - name: Install Mechanic CLI
+        run: pip install -e mechanic/desktop
+
+      - name: Setup Mechanic tools
+        run: mech setup --skip-config
+
+      - name: Generate sandbox stubs
+        run: mech call sandbox.generate
+
+      - name: Sandbox tests
+        run: |
+          mech call sandbox.test '{"addon": "NoMoreWorldQuests", "path": "${{ github.workspace }}"}'
+
+      - name: Busted tests
+        run: |
+          mech call addon.test '{"addon": "NoMoreWorldQuests", "path": "${{ github.workspace }}"}'
