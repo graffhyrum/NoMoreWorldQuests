@@ -8,13 +8,16 @@
 ## X-Curse-Project-ID: 1569103
 ## IconTexture: Interface\AddOns\NoMoreWorldQuests\assets\logo\logo-64.tga
 ## LoadWith: Blizzard_TalkingHeadUI
+## OptionalDeps: !Mechanic
 
 libs\LibStub.lua
 libs\CallbackHandler-1.0.lua
 libs\LibDataBroker-1.1.lua
 libs\LibDBIcon-1.0.lua
 
+core\init.lua
 core\VisibilityRule.lua
+core\SuppressionPolicy.lua
 core\QuestUtil.lua
 core\WorldQuestRule.lua
 core\MapCanvas.lua
@@ -34,5 +37,6 @@ active\IntrusionTrace.lua
 ui\Settings.lua
 ui\MinimapButton.lua
 ui\Slash.lua
+ui\MechanicTests.lua
 
 core\Bootstrap.lua
