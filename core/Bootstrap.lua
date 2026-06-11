@@ -1,5 +1,8 @@
 local addonName = ...
 local NMWQ = _G.NoMoreWorldQuests
+if not NMWQ or not NMWQ.Controller or not NMWQ.MinimapSurface then
+	return
+end
 
 NMWQ.Controller.RegisterSurface(NMWQ.MinimapSurface)
 NMWQ.Controller.RegisterSurface(NMWQ.WorldMapSurface)

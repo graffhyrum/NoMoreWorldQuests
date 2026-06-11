@@ -1,5 +1,6 @@
 local addonName = ...
-local NMWQ = _G.NoMoreWorldQuests
+local NMWQ = _G.NoMoreWorldQuests or {}
+_G.NoMoreWorldQuests = NMWQ
 
 local Controller = {}
 NMWQ.Controller = Controller
