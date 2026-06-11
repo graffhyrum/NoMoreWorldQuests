@@ -16,16 +16,15 @@ local function worldQuestModule()
 end
 
 local function shouldSkipQuest(questID)
-	return NMWQ.Controller:IsEnabled()
-		and questID
-		and NMWQ.VisibilityRule.ShouldSuppress(questID)
+	return NMWQ.SuppressionPolicy.ShouldSkipQuest(
+		NMWQ.Controller:IsEnabled(),
+		questID,
+		NMWQ.VisibilityRule.ShouldSuppress
+	)
 end
 
 local function shouldSkipAutoQuestPopup(questID, popUpType)
-	if popUpType == "COMPLETE" then
-		return false
-	end
-	return shouldSkipQuest(questID)
+	return NMWQ.SuppressionPolicy.ShouldSkipAutoQuestPopup(questID, popUpType, shouldSkipQuest)
 end
 
 local function markModuleDirty()
@@ -58,7 +57,8 @@ local function installTopBannerHook()
 	end
 	originalDisplayForQuest = ObjectiveTrackerTopBannerMixin.DisplayForQuest
 	function ObjectiveTrackerTopBannerMixin:DisplayForQuest(questID, module)
-		if NMWQ.Controller:IsEnabled()
+		if
+			NMWQ.Controller:IsEnabled()
 			and module
 			and module.showWorldQuests
 			and questID
@@ -71,7 +71,7 @@ local function installTopBannerHook()
 end
 
 local function installTrackerPresentationHooks()
-	if QuestUtil and not originalTrackWorldQuest and QuestUtil.TrackWorldQuest then
+	if QuestUtil and QuestUtil.TrackWorldQuest and not originalTrackWorldQuest then
 		originalTrackWorldQuest = QuestUtil.TrackWorldQuest
 		function QuestUtil.TrackWorldQuest(questID, watchType)
 			if shouldSkipQuest(questID) then
@@ -80,7 +80,11 @@ local function installTrackerPresentationHooks()
 			return originalTrackWorldQuest(questID, watchType)
 		end
 	end
-	if AutoQuestPopupTrackerMixin and not originalShouldDisplayAutoQuest then
+	if
+		AutoQuestPopupTrackerMixin
+		and AutoQuestPopupTrackerMixin.ShouldDisplayAutoQuest
+		and not originalShouldDisplayAutoQuest
+	then
 		originalShouldDisplayAutoQuest = AutoQuestPopupTrackerMixin.ShouldDisplayAutoQuest
 		function AutoQuestPopupTrackerMixin:ShouldDisplayAutoQuest(questID)
 			if shouldSkipQuest(questID) then
@@ -89,7 +93,11 @@ local function installTrackerPresentationHooks()
 			return originalShouldDisplayAutoQuest(self, questID)
 		end
 	end
-	if AutoQuestPopupTrackerMixin and not originalAddAutoQuestPopUp then
+	if
+		AutoQuestPopupTrackerMixin
+		and AutoQuestPopupTrackerMixin.AddAutoQuestPopUp
+		and not originalAddAutoQuestPopUp
+	then
 		originalAddAutoQuestPopUp = AutoQuestPopupTrackerMixin.AddAutoQuestPopUp
 		function AutoQuestPopupTrackerMixin:AddAutoQuestPopUp(questID, popUpType, itemID)
 			if shouldSkipAutoQuestPopup(questID, popUpType) then
