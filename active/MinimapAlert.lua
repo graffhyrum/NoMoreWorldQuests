@@ -45,9 +45,7 @@ local function stopPulse()
 end
 
 local function refreshPulse()
-	local shouldPulse = NMWQ.Controller:IsEnabled()
-		and NMWQ.ActiveWQZone
-		and NMWQ.ActiveWQZone:IsInActiveZone()
+	local shouldPulse = NMWQ.Controller:IsEnabled() and NMWQ.ActiveWQZone and NMWQ.ActiveWQZone:IsInActiveZone()
 	if shouldPulse == pulseOn then
 		return
 	end

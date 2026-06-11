@@ -6,8 +6,7 @@ NMWQ.Slash = Slash
 local function printStatus()
 	local on = NMWQ.Controller:IsEnabled()
 	DEFAULT_CHAT_FRAME:AddMessage(
-		"|cff33cc99No More World Quests|r suppression is "
-			.. (on and "|cff00ff00ON|r" or "|cffff6666OFF|r")
+		"|cff33cc99No More World Quests|r suppression is " .. (on and "|cff00ff00ON|r" or "|cffff6666OFF|r")
 	)
 end
 
