@@ -34,11 +34,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 local DBICON10 = "LibDBIcon-1.0"
 local DBICON10_MINOR = tonumber(("$Rev: 30 $"):match("(%d+)"))
-if not LibStub then error(DBICON10 .. " requires LibStub.") end
+if not LibStub then
+	error(DBICON10 .. " requires LibStub.")
+end
 local ldb = LibStub("LibDataBroker-1.1", true)
-if not ldb then error(DBICON10 .. " requires LibDataBroker-1.1.") end
+if not ldb then
+	error(DBICON10 .. " requires LibDataBroker-1.1.")
+end
 local lib = LibStub:NewLibrary(DBICON10, DBICON10_MINOR)
-if not lib then return end
+if not lib then
+	return
+end
 
 lib.disabled = lib.disabled or nil
 lib.objects = lib.objects or {}
@@ -75,14 +81,18 @@ end
 -- Tooltip code ripped from StatBlockCore by Funkydude
 local function getAnchors(frame)
 	local x, y = frame:GetCenter()
-	if not x or not y then return "CENTER" end
-	local hhalf = (x > UIParent:GetWidth()*2/3) and "RIGHT" or (x < UIParent:GetWidth()/3) and "LEFT" or ""
-	local vhalf = (y > UIParent:GetHeight()/2) and "TOP" or "BOTTOM"
-	return vhalf..hhalf, frame, (vhalf == "TOP" and "BOTTOM" or "TOP")..hhalf
+	if not x or not y then
+		return "CENTER"
+	end
+	local hhalf = (x > UIParent:GetWidth() * 2 / 3) and "RIGHT" or (x < UIParent:GetWidth() / 3) and "LEFT" or ""
+	local vhalf = (y > UIParent:GetHeight() / 2) and "TOP" or "BOTTOM"
+	return vhalf .. hhalf, frame, (vhalf == "TOP" and "BOTTOM" or "TOP") .. hhalf
 end
 
 local function onEnter(self)
-	if self.isMoving then return end
+	if self.isMoving then
+		return
+	end
 	local obj = self.dataObject
 	if obj.OnTooltipShow then
 		GameTooltip:SetOwner(self, "ANCHOR_NONE")
@@ -97,7 +107,9 @@ end
 local function onLeave(self)
 	local obj = self.dataObject
 	GameTooltip:Hide()
-	if obj.OnLeave then obj.OnLeave(self) end
+	if obj.OnLeave then
+		obj.OnLeave(self)
+	end
 end
 
 --------------------------------------------------------------------------------
@@ -106,43 +118,57 @@ local onClick, onMouseUp, onMouseDown, onDragStart, onDragStop, onDragEnd, updat
 
 do
 	local minimapShapes = {
-		["ROUND"] = {true, true, true, true},
-		["SQUARE"] = {false, false, false, false},
-		["CORNER-TOPLEFT"] = {false, false, false, true},
-		["CORNER-TOPRIGHT"] = {false, false, true, false},
-		["CORNER-BOTTOMLEFT"] = {false, true, false, false},
-		["CORNER-BOTTOMRIGHT"] = {true, false, false, false},
-		["SIDE-LEFT"] = {false, true, false, true},
-		["SIDE-RIGHT"] = {true, false, true, false},
-		["SIDE-TOP"] = {false, false, true, true},
-		["SIDE-BOTTOM"] = {true, true, false, false},
-		["TRICORNER-TOPLEFT"] = {false, true, true, true},
-		["TRICORNER-TOPRIGHT"] = {true, false, true, true},
-		["TRICORNER-BOTTOMLEFT"] = {true, true, false, true},
-		["TRICORNER-BOTTOMRIGHT"] = {true, true, true, false},
+		["ROUND"] = { true, true, true, true },
+		["SQUARE"] = { false, false, false, false },
+		["CORNER-TOPLEFT"] = { false, false, false, true },
+		["CORNER-TOPRIGHT"] = { false, false, true, false },
+		["CORNER-BOTTOMLEFT"] = { false, true, false, false },
+		["CORNER-BOTTOMRIGHT"] = { true, false, false, false },
+		["SIDE-LEFT"] = { false, true, false, true },
+		["SIDE-RIGHT"] = { true, false, true, false },
+		["SIDE-TOP"] = { false, false, true, true },
+		["SIDE-BOTTOM"] = { true, true, false, false },
+		["TRICORNER-TOPLEFT"] = { false, true, true, true },
+		["TRICORNER-TOPRIGHT"] = { true, false, true, true },
+		["TRICORNER-BOTTOMLEFT"] = { true, true, false, true },
+		["TRICORNER-BOTTOMRIGHT"] = { true, true, true, false },
 	}
 
 	function updatePosition(button)
 		local angle = math.rad(button.db and button.db.minimapPos or button.minimapPos or 225)
 		local x, y, q = math.cos(angle), math.sin(angle), 1
-		if x < 0 then q = q + 1 end
-		if y > 0 then q = q + 2 end
+		if x < 0 then
+			q = q + 1
+		end
+		if y > 0 then
+			q = q + 2
+		end
 		local minimapShape = GetMinimapShape and GetMinimapShape() or "ROUND"
 		local quadTable = minimapShapes[minimapShape]
 		if quadTable[q] then
-			x, y = x*80, y*80
+			x, y = x * 80, y * 80
 		else
 			local diagRadius = 103.13708498985 --math.sqrt(2*(80)^2)-10
-			x = math.max(-80, math.min(x*diagRadius, 80))
-			y = math.max(-80, math.min(y*diagRadius, 80))
+			x = math.max(-80, math.min(x * diagRadius, 80))
+			y = math.max(-80, math.min(y * diagRadius, 80))
 		end
 		button:SetPoint("CENTER", Minimap, "CENTER", x, y)
 	end
 end
 
-function onClick(self, b) if self.dataObject.OnClick then self.dataObject.OnClick(self, b) end end
-function onMouseDown(self) self.isMouseDown = true; self.icon:UpdateCoord() end
-function onMouseUp(self) self.isMouseDown = false; self.icon:UpdateCoord() end
+function onClick(self, b)
+	if self.dataObject.OnClick then
+		self.dataObject.OnClick(self, b)
+	end
+end
+function onMouseDown(self)
+	self.isMouseDown = true
+	self.icon:UpdateCoord()
+end
+function onMouseUp(self)
+	self.isMouseDown = false
+	self.icon:UpdateCoord()
+end
 
 do
 	local function onUpdate(self)
@@ -176,7 +202,7 @@ function onDragStop(self)
 	self.isMoving = nil
 end
 
-local defaultCoords = {0, 1, 0, 1}
+local defaultCoords = { 0, 1, 0, 1 }
 local function updateCoord(self)
 	local coords = self:GetParent().dataObject.iconCoords or defaultCoords
 	local deltaX, deltaY = 0, 0
@@ -188,7 +214,7 @@ local function updateCoord(self)
 end
 
 local function createButton(name, object, db)
-	local button = CreateFrame("Button", "LibDBIcon10_"..name, Minimap)
+	local button = CreateFrame("Button", "LibDBIcon10_" .. name, Minimap)
 	button.dataObject = object
 	button.db = db
 	button:SetFrameStrata("MEDIUM")
@@ -232,8 +258,11 @@ local function createButton(name, object, db)
 
 	if lib.loggedIn then
 		updatePosition(button)
-		if not db or not db.hide then button:Show()
-		else button:Hide() end
+		if not db or not db.hide then
+			button:Show()
+		else
+			button:Hide()
+		end
 	end
 end
 
@@ -254,8 +283,11 @@ if not lib.loggedIn then
 	f:SetScript("OnEvent", function()
 		for _, object in pairs(lib.objects) do
 			updatePosition(object)
-			if not lib.disabled and (not object.db or not object.db.hide) then object:Show()
-			else object:Hide() end
+			if not lib.disabled and (not object.db or not object.db.hide) then
+				object:Show()
+			else
+				object:Hide()
+			end
 		end
 		lib.loggedIn = true
 		f:SetScript("OnEvent", nil)
@@ -269,41 +301,57 @@ local function getDatabase(name)
 end
 
 function lib:Register(name, object, db)
-	if not object.icon then error("Can't register LDB objects without icons set!") end
-	if lib.objects[name] or lib.notCreated[name] then error("Already registered, nubcake.") end
+	if not object.icon then
+		error("Can't register LDB objects without icons set!")
+	end
+	if lib.objects[name] or lib.notCreated[name] then
+		error("Already registered, nubcake.")
+	end
 	if not lib.disabled and (not db or not db.hide) then
 		createButton(name, object, db)
 	else
-		lib.notCreated[name] = {object, db}
+		lib.notCreated[name] = { object, db }
 	end
 end
 
 function lib:Lock(name)
-	if not lib:IsRegistered(name) then return end
+	if not lib:IsRegistered(name) then
+		return
+	end
 	if lib.objects[name] then
 		lib.objects[name]:SetScript("OnDragStart", nil)
 		lib.objects[name]:SetScript("OnDragStop", nil)
 	end
 	local db = getDatabase(name)
-	if db then db.lock = true end
+	if db then
+		db.lock = true
+	end
 end
 
 function lib:Unlock(name)
-	if not lib:IsRegistered(name) then return end
+	if not lib:IsRegistered(name) then
+		return
+	end
 	if lib.objects[name] then
 		lib.objects[name]:SetScript("OnDragStart", onDragStart)
 		lib.objects[name]:SetScript("OnDragStop", onDragStop)
 	end
 	local db = getDatabase(name)
-	if db then db.lock = nil end
+	if db then
+		db.lock = nil
+	end
 end
 
 function lib:Hide(name)
-	if not lib.objects[name] then return end
+	if not lib.objects[name] then
+		return
+	end
 	lib.objects[name]:Hide()
 end
 function lib:Show(name)
-	if lib.disabled then return end
+	if lib.disabled then
+		return
+	end
 	check(name)
 	lib.objects[name]:Show()
 	updatePosition(lib.objects[name])
@@ -312,10 +360,14 @@ function lib:IsRegistered(name)
 	return (lib.objects[name] or lib.notCreated[name]) and true or false
 end
 function lib:Refresh(name, db)
-	if lib.disabled then return end
+	if lib.disabled then
+		return
+	end
 	check(name)
 	local button = lib.objects[name]
-	if db then button.db = db end
+	if db then
+		button.db = db
+	end
 	updatePosition(button)
 	if not button.db or not button.db.hide then
 		button:Show()
@@ -356,4 +408,3 @@ function lib:DisableLibrary()
 		object:Hide()
 	end
 end
-

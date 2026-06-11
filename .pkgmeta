@@ -4,6 +4,11 @@ enable-nolib-creation: no
 ignore:
   - .git
   - .github
+  - Tests
+  - Libs
+  - justfile
+  - .busted
+  - .luacheckrc
   - .beads
   - .cursor
   - .codex
