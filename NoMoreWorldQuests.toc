@@ -3,7 +3,7 @@
 ## Notes: Suppress during-quest world quest UI; completion prompts always show.
 ## Author: graffhyrum
 ## Category-enUS: Quests
-## Version: 1.0.0
+## Version: 1.0.1
 ## SavedVariables: NoMoreWorldQuestsDB
 ## X-Curse-Project-ID: 1569103
 ## IconTexture: Interface\AddOns\NoMoreWorldQuests\assets\logo\logo-64.tga
