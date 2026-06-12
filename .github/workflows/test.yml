@@ -43,17 +43,6 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y lua5.1 liblua5.1-0-dev luarocks
           sudo luarocks install busted
-          # #region agent log
-          {
-            echo -n '{"sessionId":"0409cc","runId":"ci","hypothesisId":"H1","location":"test.yml:install-lua-busted","message":"linux tool paths after apt/luarocks install","data":{'
-            echo -n '"lua5.1":"'$(command -v lua5.1 || echo missing)'",'
-            echo -n '"busted":"'$(command -v busted || echo missing)'",'
-            echo -n '"busted_version":"'$(busted --version 2>/dev/null | head -1 || echo missing)'"'
-            echo '},"timestamp":'$(date +%s)'000}'
-          } >> "${{ github.workspace }}/debug-0409cc.log"
-          # #endregion
-          command -v busted
-          busted --version
 
       - name: Setup Mechanic tools
         run: mech setup --skip-config
@@ -67,20 +56,4 @@ jobs:
 
       - name: Busted tests
         run: |
-          # #region agent log
-          {
-            echo -n '{"sessionId":"0409cc","runId":"ci","hypothesisId":"H2","location":"test.yml:pre-busted","message":"mech tool discovery before addon.test","data":{'
-            echo -n '"which_busted":"'$(command -v busted || echo missing)'"'
-            echo '},"timestamp":'$(date +%s)'000}'
-          } >> "${{ github.workspace }}/debug-0409cc.log"
-          # #endregion
-          mech call tools.status
           mech call addon.test '{"addon": "NoMoreWorldQuests", "path": "${{ github.workspace }}"}'
-
-      - name: Upload debug log
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: debug-0409cc
-          path: debug-0409cc.log
-          if-no-files-found: ignore
