@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.1
+
+### Patch Changes
+
+- a82ffe4: Improved objective tracker suppression reliability by only installing hooks when Blizzard tracker APIs are present, and centralized skip rules in SuppressionPolicy.
+- a82ffe4: Updated vendored LibDBIcon, LibDataBroker, CallbackHandler, and LibStub libraries.
+
 ## 1.0.0
 
 - Initial release: suppress during-quest world quest UI on minimap, world map, intrusion, and objective tracker
