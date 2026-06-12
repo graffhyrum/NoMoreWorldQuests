@@ -13,11 +13,10 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: actions/checkout@v6
-        with:
-          repository: Falkicon/Mechanic
-          path: mechanic
-          persist-credentials: false
+      # Plain clone avoids actions/checkout auth cleanup hitting Mechanic's
+      # broken submodule gitlinks (LibDBIcon-1.0 etc. with no .gitmodules URL).
+      - name: Checkout Mechanic
+        run: git clone --depth 1 https://github.com/Falkicon/Mechanic.git mechanic
 
       - uses: actions/setup-python@v5
         with:
