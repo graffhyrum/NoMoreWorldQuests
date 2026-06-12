@@ -31,8 +31,7 @@ local function talkingHeadSnapshot()
 	if not C_TalkingHead or not C_TalkingHead.GetCurrentLineInfo then
 		return "line=?"
 	end
-	local displayInfo, _, vo, _, lineNumber, numLines, name, text =
-		C_TalkingHead.GetCurrentLineInfo()
+	local displayInfo, _, vo, _, lineNumber, numLines, name, text = C_TalkingHead.GetCurrentLineInfo()
 	local bits = {}
 	if name and name ~= "" then
 		bits[#bits + 1] = "name=" .. tostring(name)
@@ -111,11 +110,7 @@ local function onTraceEvent(_, event, ...)
 		if vignetteGUID and C_VignetteInfo and C_VignetteInfo.GetVignetteInfo then
 			local info = C_VignetteInfo.GetVignetteInfo(vignetteGUID)
 			if info then
-				detail = detail
-					.. " rewardQuest="
-					.. tostring(info.rewardQuestID)
-					.. " name="
-					.. tostring(info.name)
+				detail = detail .. " rewardQuest=" .. tostring(info.rewardQuestID) .. " name=" .. tostring(info.name)
 			end
 		end
 	end
@@ -123,9 +118,7 @@ local function onTraceEvent(_, event, ...)
 		local questID, success = ...
 		detail = detail .. " loaded=" .. tostring(success)
 		if questID and C_QuestLog then
-			detail = detail
-				.. " isWQ="
-				.. tostring(C_QuestLog.IsWorldQuest(questID))
+			detail = detail .. " isWQ=" .. tostring(C_QuestLog.IsWorldQuest(questID))
 		end
 	end
 	IntrusionTrace.Log("event", detail)

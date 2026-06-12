@@ -50,8 +50,7 @@ end
 
 local function hideWQVignettePins()
 	NMWQ.MapCanvas.ForEachPinByTemplates(VIGNETTE_PIN_TEMPLATES, function(pin)
-		local questID = pin.GetRewardQuestID and pin:GetRewardQuestID()
-			or vignetteQuestID(pin.vignetteInfo)
+		local questID = pin.GetRewardQuestID and pin:GetRewardQuestID() or vignetteQuestID(pin.vignetteInfo)
 		if questID and NMWQ.VisibilityRule.ShouldSuppress(questID) then
 			hideVignettePin(pin)
 		end

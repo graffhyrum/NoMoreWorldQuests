@@ -83,6 +83,25 @@ Domain terms and behavior contracts live in [CONTEXT.md](CONTEXT.md). Agent and 
 
 Blizzard UI reference (optional, local): `%USERPROFILE%\.agents\repos\wow-ui-source\` — see `wow-ui-source` skill in `~/.agents/skills/`. Not shipped with the addon.
 
+### Dev dependencies
+
+| Tool | Role |
+|------|------|
+| [just](https://github.com/casey/just) | Project command runner (`just --list`) |
+| [Mechanic](https://github.com/Falkicon/Mechanic) | Offline tests, lint, format, in-game dashboard |
+| [Bun](https://bun.sh) | Runs version/publish scripts |
+| [Changesets](https://github.com/changesets/changesets) | Changelog + semver (`bun add -d @changesets/cli`) |
+
+Quick start:
+
+```bash
+just bootstrap   # first-time Mechanic setup (see docs/mechanic-setup.md)
+just test        # sandbox + Busted
+just check       # validate TOC + lint
+```
+
+Mechanic install and `~/.mechanic/config.json` paths: [docs/mechanic-setup.md](docs/mechanic-setup.md).
+
 ### Changelog and releases
 
 Uses [Changesets](https://github.com/changesets/changesets) + GitHub Actions:
@@ -92,7 +111,7 @@ Uses [Changesets](https://github.com/changesets/changesets) + GitHub Actions:
 3. Merge → **Version Packages** opens a PR bumping `CHANGELOG.md`, `package.json`, and `NoMoreWorldQuests.toc`.
 4. Merge that PR → CI pushes tag `v*` → **Release** workflow publishes to CurseForge and GitHub Releases.
 
-Local only: `bun run version` (same as CI version step). See [.changeset/README.md](.changeset/README.md).
+Local only: `just version` (same as CI version step). Before tagging: `just pre-release`. Release: `just release vX.Y.Z` or `just publish-tag` after version bump. See [.changeset/README.md](.changeset/README.md).
 
 ## License
 

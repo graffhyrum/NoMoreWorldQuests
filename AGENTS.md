@@ -120,6 +120,14 @@ Five canonical triage roles mapped to `bd label` strings (defaults). See `docs/a
 
 Single-context layout — `CONTEXT.md` + `docs/adr/` at repo root. See `docs/agents/domain.md`.
 
+## Development workflow (Mechanic + just)
+
+- Run `just test` after code changes (sandbox + Busted).
+- Run `just check` before handoff (TOC validate + Luacheck).
+- First-time setup: `just bootstrap` — see [docs/mechanic-setup.md](docs/mechanic-setup.md).
+- In-game verification: enable `!Mechanic`, `/reload`, check Tests tab for NoMoreWorldQuests.
+- Mechanic command reference: `!Mechanic/AGENTS.md` in the Mechanic repo.
+
 ## Blizzard UI reference (out of repo)
 
 WoW UI implementation reference lives on the machine at `%USERPROFILE%\.agents\repos\wow-ui-source\` (not in this git repo).

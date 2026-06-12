@@ -118,10 +118,7 @@ end
 function QuestUtil.HasSuppressedWorldQuestInArea()
 	local found = false
 	QuestUtil.ForEachRelevantQuestID(function(questID)
-		if not found
-			and NMWQ.VisibilityRule.ShouldSuppress(questID)
-			and QuestUtil.TaskIsInArea(questID)
-		then
+		if not found and NMWQ.VisibilityRule.ShouldSuppress(questID) and QuestUtil.TaskIsInArea(questID) then
 			found = true
 		end
 	end)
