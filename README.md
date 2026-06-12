@@ -81,7 +81,7 @@ Architecture follows a pluggable **suppression controller + visibility rules + s
 
 Domain terms and behavior contracts live in [CONTEXT.md](CONTEXT.md). Agent and issue-tracker notes are under [docs/agents/](docs/agents/).
 
-WoW UI reference source is vendored at `repos/wow-ui-source/` (git subtree, not shipped with the addon).
+Blizzard UI reference (optional, local): `%USERPROFILE%\.agents\repos\wow-ui-source\` — see `wow-ui-source` skill in `~/.agents/skills/`. Not shipped with the addon.
 
 ### Changelog and releases
 

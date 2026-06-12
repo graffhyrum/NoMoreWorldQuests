@@ -16,3 +16,6 @@ node_modules/
 
 # BigWigs packager output
 .release/
+
+# Legacy path — reference moved to %USERPROFILE%\.agents\repos\wow-ui-source
+repos/
