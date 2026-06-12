@@ -4,7 +4,7 @@ import { syncTocVersion } from "./sync-toc-version";
 
 const root = `${import.meta.dir}/..`;
 
-const changeset = Bun.spawn(["changeset", "version"], {
+const changeset = Bun.spawn(["bunx", "changeset", "version"], {
   cwd: root,
   stdout: "inherit",
   stderr: "inherit",
