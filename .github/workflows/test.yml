@@ -10,11 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
 
       - uses: actions/checkout@v6
         with:
           repository: Falkicon/Mechanic
           path: mechanic
+          persist-credentials: false
 
       - uses: actions/setup-python@v5
         with:

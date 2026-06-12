@@ -20,13 +20,13 @@ default:
 link-mechanic MECHANIC_REPO:
     $target = (Resolve-Path '{{MECHANIC_REPO}}').Path; $addonsDir = Split-Path '{{root}}' -Parent; $link = Join-Path $addonsDir 'Mechanic'; if (Test-Path $link) { Remove-Item $link -Force -Recurse -ErrorAction SilentlyContinue }; New-Item -ItemType Junction -Path $link -Target $target | Out-Null; Write-Host "Linked $link -> $target"
 
-# First-time Mechanic + sandbox setup (requires `mech` on PATH)
-bootstrap:
+# First-time Mechanic + sandbox setup (requires `mech` on PATH). Default: C:/Tools/Mechanic
+bootstrap MECHANIC_REPO="C:/Tools/Mechanic":
     @just _require-mech
-    @just link-mechanic C:/Tools/Mechanic
+    @just link-mechanic {{MECHANIC_REPO}}
     mech setup --skip-config
     @just restore-lua
-    $fw = "C:/Tools/Mechanic/sandbox/generated/test_framework.lua"; $src = "{{root_json}}/scripts/sandbox-test-framework.lua"; New-Item -ItemType Directory -Force -Path (Split-Path $fw) | Out-Null; Copy-Item $src $fw -Force
+    $mechanic = "{{MECHANIC_REPO}}"; $fw = "$mechanic/sandbox/generated/test_framework.lua"; $src = "{{root_json}}/scripts/sandbox-test-framework.lua"; New-Item -ItemType Directory -Force -Path (Split-Path $fw) | Out-Null; Copy-Item $src $fw -Force
 
 # mech setup can overwrite lua.exe with a bad SourceForge download (HTML, checksum fail)
 restore-lua:

@@ -5,7 +5,7 @@ ignore:
   - .git
   - .github
   - Tests
-  - Libs
+  - libs
   - justfile
   - .busted
   - .luacheckrc

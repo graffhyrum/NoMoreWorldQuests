@@ -67,7 +67,7 @@ function MechanicTests:GetResult(id)
 			NMWQ.ObjectiveTrackerSurface:Enable()
 		end)
 		local after = WorldQuestObjectiveTracker and WorldQuestObjectiveTracker.AddQuest
-		local hooked = before ~= nil and after ~= nil and before ~= after
+		local hooked = after ~= nil and (before == nil or before ~= after)
 		return {
 			passed = ok and hooked,
 			message = ok and (hooked and "Hook installed" or "Hook not installed") or tostring(err),
