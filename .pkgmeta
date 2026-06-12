@@ -13,7 +13,6 @@ ignore:
   - .agents
   - .changeset
   - docs
-  - repos
   - scripts
   - CONTEXT.md
   - AGENTS.md

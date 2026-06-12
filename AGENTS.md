@@ -120,23 +120,10 @@ Five canonical triage roles mapped to `bd label` strings (defaults). See `docs/a
 
 Single-context layout — `CONTEXT.md` + `docs/adr/` at repo root. See `docs/agents/domain.md`.
 
-## Vendored Repositories
+## Blizzard UI reference (out of repo)
 
-External reference code lives under `repos/`. The folder is visible in the editor but excluded from workspace search and Cursor indexing — use `@repos/wow-ui-source/` to attach it in chat.
+WoW UI implementation reference lives on the machine at `%USERPROFILE%\.agents\repos\wow-ui-source\` (not in this git repo).
 
-- Use vendored repos as read-only reference when working with WoW UI APIs
-- Prefer patterns from vendored source over guesses or web search
-- Do not edit files under `repos/` unless explicitly asked
-- Do not copy or import from `repos/` into addon code — addon code lives at repo root
-
-### WoW UI source
-
-[`Gethe/wow-ui-source`](https://github.com/Gethe/wow-ui-source) is vendored at `repos/wow-ui-source/` (branch `live`).
-
-When implementing or debugging addon surfaces (minimap, world map, objective tracker, etc.), inspect `repos/wow-ui-source/Interface/` for Blizzard frame mixins, POI providers, and quest UI behavior.
-
-Update vendored copy:
-
-```bash
-git subtree pull --prefix=repos/wow-ui-source https://github.com/Gethe/wow-ui-source.git live --squash
-```
+- Load the **`wow-ui-source`** skill (`~/.agents/skills/wow-ui-source/SKILL.md`) when debugging addon UI surfaces (minimap, world map, objective tracker, POI providers, frame mixins).
+- `C_*` API signatures and globals: **WoW API VS Code extension** (`ketho.wow-api`) — already in `.vscode/settings.json`.
+- Read-only reference — do not copy Blizzard code into addon sources.
