@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.2
+
+### Patch Changes
+
+- Bump Interface to 120007 for WoW 12.0.7
+
 ## 1.0.1
 
 ### Patch Changes

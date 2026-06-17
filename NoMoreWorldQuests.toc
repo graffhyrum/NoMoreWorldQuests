@@ -1,9 +1,9 @@
-## Interface: 120005
+## Interface: 120007
 ## Title: No More World Quests
 ## Notes: Suppress during-quest world quest UI; completion prompts always show.
 ## Author: graffhyrum
 ## Category-enUS: Quests
-## Version: 1.0.1
+## Version: 1.0.2
 ## SavedVariables: NoMoreWorldQuestsDB
 ## X-Curse-Project-ID: 1569103
 ## IconTexture: Interface\AddOns\NoMoreWorldQuests\assets\logo\logo-64.tga

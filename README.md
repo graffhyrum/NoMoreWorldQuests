@@ -52,7 +52,7 @@ Required libraries (LibStub, LibDataBroker, LibDBIcon) are **bundled** under `li
 ## Requirements
 
 - **WoW Retail** (Classic / Era not supported in v1)
-- Interface version: **120005** (see `NoMoreWorldQuests.toc`)
+- Interface version: **120007** (see `NoMoreWorldQuests.toc`)
 
 ## What it does *not* do
 
