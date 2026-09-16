@@ -88,6 +88,18 @@ version:
 sync-toc:
     bun scripts/sync-toc-version.ts
 
+# Live retail Interface vs TOC (JSON)
+retail-status:
+    bun scripts/retail-status.ts
+
+# Write TOC Interface + patch version from Wow.exe. No git commit.
+retail-bump:
+    bun scripts/retail-bump.ts
+
+# Preview retail-bump writes as JSON
+retail-bump-dry:
+    bun scripts/retail-bump.ts --dry-run
+
 # Tag and push to trigger .github/workflows/release.yml
 release TAG:
     git tag {{TAG}}
@@ -98,4 +110,8 @@ publish-tag:
     bun run publish:tag
 
 # Pre-release gate
-pre-release: check test
+pre-release: check test test-scripts
+
+# Bun unit tests for release scripts
+test-scripts:
+    bun test scripts

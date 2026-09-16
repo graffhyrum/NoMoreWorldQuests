@@ -95,23 +95,22 @@ Blizzard UI reference (optional, local): `%USERPROFILE%\.agents\repos\wow-ui-sou
 Quick start:
 
 ```bash
-just bootstrap   # first-time Mechanic setup (see docs/mechanic-setup.md)
-just test        # sandbox + Busted
-just check       # validate TOC + lint
+just bootstrap        # first-time Mechanic setup (see docs/mechanic-setup.md)
+just test             # sandbox + Busted
+just test-scripts     # bun tests for release scripts
+just check            # validate TOC + lint
+just retail-status    # live client Interface vs TOC
 ```
 
 Mechanic install and `~/.mechanic/config.json` paths: [docs/mechanic-setup.md](docs/mechanic-setup.md).
 
 ### Changelog and releases
 
-Uses [Changesets](https://github.com/changesets/changesets) + GitHub Actions:
+Retail TOC bump: `.agents/skills/retail-release/SKILL.md` (`just retail-status`, `just retail-bump`, `just pre-release`). Push to `master` tags `v*` and publishes to CurseForge.
 
-1. After a user-facing change: `bun run changeset`, pick semver bump, commit the `.changeset/*.md` file.
-2. Open PR → **Changesets** workflow verifies a changeset exists when needed.
-3. Merge → **Version Packages** opens a PR bumping `CHANGELOG.md`, `package.json`, and `NoMoreWorldQuests.toc`.
-4. Merge that PR → CI pushes tag `v*` → **Release** workflow publishes to CurseForge and GitHub Releases.
+Feature work: `bun run changeset`, PR, then Version Packages. See [.changeset/README.md](.changeset/README.md).
 
-Local only: `just version` (same as CI version step). Before tagging: `just pre-release`. Release: `just release vX.Y.Z` or `just publish-tag` after version bump. See [.changeset/README.md](.changeset/README.md).
+Local tag fallback: `just publish-tag`.
 
 ## License
 

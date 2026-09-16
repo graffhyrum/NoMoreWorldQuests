@@ -16,6 +16,28 @@ permissions:
   contents: read
 
 jobs:
+  scripts:
+    if: >-
+      github.event_name == 'push'
+      || (github.event_name == 'pull_request_target'
+        && github.event.pull_request.head.repo.full_name == github.repository)
+      || (github.event_name == 'workflow_run'
+        && github.event.workflow_run.conclusion == 'success')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: >-
+            ${{
+              github.event_name == 'pull_request_target' && github.event.pull_request.head.sha
+              || github.event_name == 'workflow_run' && 'changeset-release/master'
+              || github.sha
+            }}
+          persist-credentials: false
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+      - run: bun test scripts
+
   test:
     if: >-
       github.event_name == 'push'

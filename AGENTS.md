@@ -120,10 +120,16 @@ Five canonical triage roles mapped to `bd label` strings (defaults). See `docs/a
 
 Single-context layout — `CONTEXT.md` + `docs/adr/` at repo root. See `docs/agents/domain.md`.
 
+### Retail release
+
+Live client TOC bump and CurseForge publish. See `.agents/skills/retail-release/SKILL.md`.
+
 ## Development workflow (Mechanic + just)
 
-- Run `just test` after code changes (sandbox + Busted).
+- Run `just test` after Lua changes (sandbox + Busted).
+- Run `just test-scripts` after release-script changes.
 - Run `just check` before handoff (TOC validate + Luacheck).
+- Run `just pre-release` before a CurseForge tag.
 - First-time setup: `just bootstrap` — see [docs/mechanic-setup.md](docs/mechanic-setup.md).
 - In-game verification: enable `!Mechanic`, `/reload`, check Tests tab for NoMoreWorldQuests.
 - Mechanic command reference: `!Mechanic/AGENTS.md` in the Mechanic repo.

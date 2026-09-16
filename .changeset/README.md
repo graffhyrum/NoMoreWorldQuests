@@ -4,9 +4,11 @@ Pending changelog entries for [Changesets](https://github.com/changesets/changes
 
 `package.json` is the version source Changesets bumps; `@changesets/cli` is a devDependency — run via `bun run changeset`.
 
+Retail TOC bumps do **not** use this folder. Use `just retail-bump` (`.agents/skills/retail-release/SKILL.md`).
+
 ## Adding a changeset
 
-After a user-facing change:
+After a user-facing **code** change:
 
 ```bash
 bun run changeset
@@ -16,27 +18,10 @@ Pick the semver bump and write a short summary. Commit the generated `.changeset
 
 PRs to `master` run the **Changesets** workflow (`changeset status --since=origin/master`).
 
-## Releasing (automated)
+## Releasing
 
-On merge to `master`, **Version Packages** (`version-packages.yml`):
+On merge to `master`, **Version Packages** opens a version PR when changesets exist, or tags `v{package.json version}` if that tag is missing.
 
-1. Opens a **Version Packages** PR when pending changesets exist.
-2. On merge of that PR, runs `bun scripts/publish-tag.ts` → pushes `v{version}`.
+**Release** publishes to CurseForge + GitHub on `v*` tag push, and when Version Packages completes (`GITHUB_TOKEN` tags do not fire `push: tags`). The job no-ops if HEAD is not an exact tag or the GitHub release already exists.
 
-Tag push triggers **Release** (`release.yml`) → CurseForge + GitHub Release via BigWigs packager.
-
-## Local
-
-Same version step as CI:
-
-```bash
-bun run version
-```
-
-Runs `changeset version`, updates `CHANGELOG.md` and `package.json`, syncs `NoMoreWorldQuests.toc`, removes consumed changeset files.
-
-Tag locally (CI normally does this):
-
-```bash
-bun run publish:tag
-```
+`just version` is the Changesets version step only. It is not the retail Interface bump.

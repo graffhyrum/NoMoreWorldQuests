@@ -3,21 +3,58 @@ name: Release
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
+  # GITHUB_TOKEN tag pushes from Version Packages do not fire `push: tags`.
+  workflow_run:
+    workflows: ["Version Packages"]
+    types: [completed]
+
+concurrency:
+  group: curseforge-release
+  cancel-in-progress: false
 
 permissions:
   contents: write
 
 jobs:
   release:
+    if: >-
+      github.event_name == 'push'
+      || (github.event_name == 'workflow_run'
+        && github.event.workflow_run.conclusion == 'success')
     runs-on: ubuntu-latest
     env:
       CF_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
       GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
+          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.ref }}
+
+      - name: Fetch tags
+        run: git fetch --tags --force origin
+
+      - name: Skip if HEAD is untagged or GitHub release exists
+        id: gate
+        run: |
+          set -euo pipefail
+          TAG="$(git describe --tags --exact-match HEAD 2>/dev/null || true)"
+          if [ -z "$TAG" ]; then
+            echo "HEAD is not an exact tag; skip CurseForge publish"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "GitHub release $TAG already exists; skip"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "skip=false" >> "$GITHUB_OUTPUT"
+
       - uses: BigWigsMods/packager@v2
+        if: steps.gate.outputs.skip != 'true'
         with:
           args: -w 0
