@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.3
+
+### Patch Changes
+
+- Bump Interface to 120100 for WoW 12.1.0
+
 ## 1.0.2
 
 ### Patch Changes
