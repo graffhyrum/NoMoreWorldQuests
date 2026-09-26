@@ -4,7 +4,7 @@ Pending changelog entries for [Changesets](https://github.com/changesets/changes
 
 `package.json` is the version source Changesets bumps; `@changesets/cli` is a devDependency — run via `bun run changeset`.
 
-Retail TOC bumps do **not** use this folder. Use `just retail-bump` (`.agents/skills/retail-release/SKILL.md`).
+Retail TOC bumps do **not** use this folder. Use `just retail-bump` (`.agents/skills/curseforge-retail-release/SKILL.md`).
 
 ## Adding a changeset
 

@@ -106,7 +106,7 @@ Mechanic install and `~/.mechanic/config.json` paths: [docs/mechanic-setup.md](d
 
 ### Changelog and releases
 
-Retail TOC bump: `.agents/skills/retail-release/SKILL.md` (`just retail-status`, `just retail-bump`, `just pre-release`). Push to `master` tags `v*` and publishes to CurseForge.
+For a retail TOC bump, run `just retail-status`, `just retail-bump`, and `just pre-release`. The agent workflow is `.agents/skills/curseforge-retail-release/SKILL.md`. A push to `master` tags `v*` and publishes to CurseForge.
 
 Feature work: `bun run changeset`, PR, then Version Packages. See [.changeset/README.md](.changeset/README.md).
 

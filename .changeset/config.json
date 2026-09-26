@@ -15,6 +15,9 @@
   "changedFilePatterns": [
     "**",
     "!.specstory/**",
-    "!.beads/**"
+    "!.beads/**",
+    "!.agents/**",
+    "!AGENTS.md",
+    "!README.md"
   ]
 }
