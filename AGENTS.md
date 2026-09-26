@@ -122,7 +122,7 @@ Single-context layout — `CONTEXT.md` + `docs/adr/` at repo root. See `docs/age
 
 ### Retail release
 
-Live client TOC bump and CurseForge publish. See `.agents/skills/retail-release/SKILL.md`.
+Live client TOC bump and CurseForge publish. Load `~/.agents/skills/curseforge-retail-release/SKILL.md`. Read addon values from `.agents/curseforge-retail-release.json`.
 
 ## Development workflow (Mechanic + just)
 
